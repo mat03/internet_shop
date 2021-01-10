@@ -1,4 +1,4 @@
-package pl.springcourse.internet_shop.service;
+package pl.springcourse.internet_shop.model;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -12,7 +12,7 @@ public class BigDecimalRandomDataGenerator {
         this.maxLimit = maxLimit;
     }
 
-    BigDecimal getRandomData()
+    public BigDecimal getRandomData()
     {
         double generatedDouble = minLimit + new Random().nextDouble() * (maxLimit - minLimit);
 

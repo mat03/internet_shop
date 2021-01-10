@@ -3,13 +3,13 @@ package pl.springcourse.internet_shop.service;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.springcourse.internet_shop.model.Product;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Component
+@Service
 @Profile("start")
 public class BasketStart implements Basket{
     private final List<Product> productsBasket;
@@ -30,7 +30,7 @@ public class BasketStart implements Basket{
         return bill;
     }
 
-
+    @Override
     @EventListener(ApplicationReadyEvent.class)
     public void viewBill() {
         System.out.println("\nBill type Start\n");

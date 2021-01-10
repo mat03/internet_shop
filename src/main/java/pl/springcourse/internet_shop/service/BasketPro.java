@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.springcourse.internet_shop.model.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-@Component
+@Service
 @Profile("pro")
 public class BasketPro implements Basket{
     @Value("${tax.value}")
@@ -47,6 +47,7 @@ public class BasketPro implements Basket{
         return bill;
     }
 
+    @Override
     @EventListener(ApplicationReadyEvent.class)
     public void viewBill() {
         System.out.println("\nBill type Pro\n");

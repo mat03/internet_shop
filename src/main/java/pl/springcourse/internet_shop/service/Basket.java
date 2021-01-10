@@ -1,5 +1,6 @@
 package pl.springcourse.internet_shop.service;
 
+import pl.springcourse.internet_shop.model.BigDecimalRandomDataGenerator;
 import pl.springcourse.internet_shop.model.Product;
 
 import java.math.BigDecimal;
@@ -8,6 +9,8 @@ import java.util.List;
 
 public interface Basket {
     BigDecimal getBill();
+
+    void viewBill();
 
     default List<Product> setExampleBasket(int elementNumberInBasket)
     {
