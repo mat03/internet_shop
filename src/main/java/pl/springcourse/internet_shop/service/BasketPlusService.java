@@ -5,42 +5,36 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import pl.springcourse.internet_shop.model.Product;
+import pl.springcourse.internet_shop.model.Basket;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 
 @Service
 @Profile("plus")
-public class BasketPlus implements Basket{
+public class BasketPlusService {
     @Value("${tax.value}")
     private BigDecimal tax;
 
-    private final List<Product> productsBasket;
+    private Basket basket;
 
-    BasketPlus()
+    BasketPlusService()
     {
-        productsBasket = setExampleBasket(5);
+        basket = new Basket(5);
     }
 
-    @Override
     public BigDecimal getBill() {
-        BigDecimal bill = new BigDecimal(0);
-        for (Product product : productsBasket) {
-            bill = bill.add(product.getPrice());
-        }
+        BigDecimal billWithTax = basket.getBill();
 
-        BigDecimal totalTaxes = new BigDecimal(String.valueOf(bill));
+        BigDecimal totalTaxes = new BigDecimal(String.valueOf(billWithTax));
         totalTaxes = totalTaxes.multiply(tax);
         totalTaxes = totalTaxes.divide(BigDecimal.valueOf(100), RoundingMode.UP);
 
-        bill = bill.add(totalTaxes);
+        billWithTax = billWithTax.add(totalTaxes);
 
-        return bill;
+        return billWithTax;
     }
 
-    @Override
     @EventListener(ApplicationReadyEvent.class)
     public void viewBill() {
         System.out.println("\nBill type Plus\n");

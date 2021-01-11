@@ -4,33 +4,24 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import pl.springcourse.internet_shop.model.Product;
+import pl.springcourse.internet_shop.model.Basket;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 @Profile("start")
-public class BasketStart implements Basket{
-    private final List<Product> productsBasket;
+public class BasketStartService {
+    private Basket basket;
 
-    BasketStart()
+    BasketStartService()
     {
-        productsBasket = setExampleBasket(5);
+        basket = new Basket(5);
     }
 
-    @Override
     public BigDecimal getBill() {
-
-        BigDecimal bill = new BigDecimal(0);
-        for (Product product : productsBasket) {
-            bill = bill.add(product.getPrice());
-        }
-
-        return bill;
+        return basket.getBill();
     }
 
-    @Override
     @EventListener(ApplicationReadyEvent.class)
     public void viewBill() {
         System.out.println("\nBill type Start\n");

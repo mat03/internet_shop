@@ -3,11 +3,11 @@ package pl.springcourse.internet_shop.model;
 import java.math.BigDecimal;
 import java.util.Random;
 
-public class BigDecimalRandomDataGenerator {
+public class CustomNumberUtils {
     final int minLimit;
     final int maxLimit;
 
-    public BigDecimalRandomDataGenerator(int minLimit, int maxLimit) {
+    public CustomNumberUtils(int minLimit, int maxLimit) {
         this.minLimit = minLimit;
         this.maxLimit = maxLimit;
     }
